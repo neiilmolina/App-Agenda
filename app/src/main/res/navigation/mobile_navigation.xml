@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_lista_tareas"
-        android:name="com.example.appagenda.ui.home.HomeFragment"
+        android:name="com.example.appagenda.ui.listaTareas.ListaTareasFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_lista_tareas" />
 
