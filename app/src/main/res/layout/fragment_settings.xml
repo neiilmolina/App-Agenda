@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/register"
+    android:padding="16dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_settings"
+        android:gravity="center"
+        android:textSize="@dimen/title_bottom_margin" />
+    <LinearLayout
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- TextView para descripción -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tema:"
+            android:textSize="18sp"
+            android:layout_gravity="start|center_vertical"
+            android:layout_weight="1"/>
+
+        <!-- ToggleButton para cambiar el tema de la aplicación -->
+        <ToggleButton
+            style="@style/ThemeOverlay.MyDarkButton"
+            android:id="@+id/toggleTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textOff="@string/light_enabled"
+            android:textOn="@string/dark_enabled"
+            android:checked="false"
+            android:textSize="18sp"
+            android:layout_gravity="end" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="@color/grey_500"
+
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="correo electronico"
+            android:textSize="24dp"
+            />
+        <EditText
+            style="@style/ThemeOverlay.MyLightEditText"
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/hint_email"
+            android:textSize="24dp" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:textSize="24dp"
+            />
+        <EditText
+            style="@style/ThemeOverlay.MyLightEditText"
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/hint_password"
+            android:password="true"
+            android:textSize="24dp" />
+        <Button
+            style="@style/ThemeOverlay.MyDarkButton"
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="@string/create_account"
+
+            android:textSize="18sp" />
+
+        <Button
+            style="@style/ThemeOverlay.MyDarkButton"
+            android:layout_margin="20dp"
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/login"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>
