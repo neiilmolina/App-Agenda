@@ -4,15 +4,23 @@
     android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@drawable/border_tarea"
+    android:layout_gravity="center|top"
+    android:layout_margin="8dp">
 
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="30sp"
+        style="@style/titulo_tarea"
         tools:text="Titulo" />
+
+    <View
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        tools:background="@color/black"
+        android:layout_height="2dp"/>
 
     <TextView
         android:id="@+id/tvDescripcion"
@@ -24,7 +32,7 @@
         android:id="@+id/tvFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         tools:text="2024/02/15" />
 
 </LinearLayout>
