@@ -15,5 +15,10 @@
         android:name="com.example.appagenda.ui.listaTareas.ListaTareasFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_lista_tareas" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.appagenda.ui.settings.SettingsFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>
