@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Lista de Tareas"
+            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginLeft="20dp"
             android:id="@+id/rvListaTareas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,6 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:backgroundTint="@color/background_btnAdd"
+            app:rippleColor="@color/background_btnAdd"
             android:layout_margin="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

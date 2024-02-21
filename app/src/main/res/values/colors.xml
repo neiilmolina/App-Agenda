@@ -8,7 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- btnAdd -->
+    <color name="color_btnAdd">#FFFFFFFF</color>
+    <color name="background_btnAdd">#A5A3A3</color>
+
     <!-- Tarea colors -->
-    <color name="border_tarea">#A5A3A3</color>
+    <color name="border_tarea">#FF000000</color>
+    <color name="fecha_tarea">#A5A3A3</color>
+    <color name="titulo_tarea">#FF000000</color>
 
 </resources>

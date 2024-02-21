@@ -13,9 +13,14 @@
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textSize="20sp"
+        style="@style/titulo_tarea"
         tools:text="Titulo" />
+
+    <View
+        android:layout_marginTop="4dp"
+        android:layout_width="match_parent"
+        tools:background="@color/black"
+        android:layout_height="2dp"/>
 
     <TextView
         android:id="@+id/tvFecha"
