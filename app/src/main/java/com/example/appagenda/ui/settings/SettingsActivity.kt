@@ -1,53 +1,33 @@
 package com.example.appagenda.ui.settings
-
-import android.content.ContentValues.TAG
-import android.content.Intent
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.preference.PreferenceFragmentCompat
-import com.example.appagenda.MainActivity
-import com.example.appagenda.R
-import com.example.appagenda.databinding.FragmentSettingsBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.auth
-
-class SettingsActivity : AppCompatActivity() {
-
-    private lateinit var _binding: FragmentSettingsBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+class SettingsActivity : Activity() {
+    // [START declare_auth]
     private lateinit var auth: FirebaseAuth
-    val settingsViewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    // [END declare_auth]
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // [START initialize_auth]
+        // Initialize Firebase Auth
         auth = Firebase.auth
-        _binding = FragmentSettingsBinding.inflate(layoutInflater)
-        setContentView(R.layout.fragment_settings)
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.register, SettingsFragment())
-                .commit()
-        }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        _binding.btnRegister.setOnClickListener { this.createAccount(_binding.etEmail.toString(), _binding.etPassword.toString()) }
+        // [END initialize_auth]
     }
-
+    // [START on_start_check_user]
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            main()
+            reload()
         }
     }
-
+    // [END on_start_check_user]
     private fun createAccount(email: String, password: String) {
         // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
@@ -70,11 +50,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         // [END create_user_with_email]
     }
-
-    private fun updateUI(user: FirebaseUser?) {
-
-    }
-
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
@@ -97,20 +72,11 @@ class SettingsActivity : AppCompatActivity() {
             }
         // [END sign_in_with_email]
     }
-
+    private fun updateUI(user: FirebaseUser?) {
+    }
     private fun reload() {
-        TODO("Not yet implemented")
     }
-
-    private fun main() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    class SettingsFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
-        }
+    companion object {
+        private const val TAG = "EmailPassword"
     }
 }
