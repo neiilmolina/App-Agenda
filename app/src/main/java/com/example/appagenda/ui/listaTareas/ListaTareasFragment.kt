@@ -6,15 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.example.appagenda.R
-import com.example.appagenda.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.appagenda.Modelo.Tarea.TareaAdapter
 import com.example.appagenda.databinding.FragmentListaTareasBinding
-import com.example.appagenda.ui.home.HomeViewModel
 
 class ListaTareasFragment  : Fragment() {
 
-    private var _binding: FragmentListaTareasBinding? = null
+    private var _binding: FragmentListaTareasBinding ?= null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,14 +23,19 @@ class ListaTareasFragment  : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val listaTareasViewModel =
             ViewModelProvider(this).get(ListaTareasViewModel::class.java)
 
         _binding = FragmentListaTareasBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
+        binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvListaTareas.adapter = TareaAdapter(listaTareasViewModel.listaTarea)
+
+        val root: View = binding.root
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
