@@ -23,6 +23,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Detalles tarea -->
+    <!-- Item -->
+    <style name="detalles_tarea_item">
+        <item name="android:background">@drawable/border_detalles_tarea</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
 
     <!-- Dark Buttons -->
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">

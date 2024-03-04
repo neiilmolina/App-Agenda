@@ -10,12 +10,12 @@ import java.util.Date
 
 class ListaTareasViewModel : ViewModel() {
     private val _listaTareas : List<Tarea> = mutableListOf<Tarea>(
-        Tarea("Prueba",Date(), "Descripcion"),
-        Tarea("Pruena2", Date(), "Descripcion"),
-        Tarea("Pruena2", Date(), "Descripcion"),
-        Tarea("Pruena2", Date(), "Descripcion"),
-        Tarea("Pruena2", Date(), "Descripcion"),
-        Tarea("Pruena2", Date(), "Descripcion")
+        Tarea( 1,"Prueba",Date(), "Descripcion"),
+        Tarea(2,"Pruena2", Date(), "Descripcion"),
+        Tarea(3,"Pruena2", Date(), "Descripcion"),
+        Tarea(4,"Pruena2", Date(), "Descripcion"),
+        Tarea(5,"Pruena2", Date(), "Descripcion"),
+        Tarea(6,"Pruena2", Date(), "Descripcion")
     )
 
     val listaTarea = _listaTareas
