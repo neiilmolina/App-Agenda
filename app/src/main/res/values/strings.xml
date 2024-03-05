@@ -11,4 +11,10 @@
     <string name="hint_password">Password</string>
     <string name="dark_enabled">Claro</string>
     <string name="light_enabled">Oscuro</string>
+
+<!--CRUD Strings-->
+    <string name="add_element">Añadir</string>
+    <string name="delete_element">Eliminar</string>
+    <string name="update_element">Editar</string>
+    <string name="select_element">Seleccionar</string>
 </resources>

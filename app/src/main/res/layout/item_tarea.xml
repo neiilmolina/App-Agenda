@@ -22,11 +22,6 @@
         tools:background="@color/black"
         android:layout_height="2dp"/>
 
-    <TextView
-        android:id="@+id/tvDescripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Descripcion" />
 
     <TextView
         android:id="@+id/tvFecha"

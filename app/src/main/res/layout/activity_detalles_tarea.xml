@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".ui.DetallesTarea.DetallesTarea">
+    tools:context=".ui.DetallesTarea.DetallesTareaActivity">
 
     <TextView
         android:id="@+id/tvTitulo"
@@ -46,17 +46,21 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDescripcion">
 
         <Button
+            style="@style/btn_styles"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:text="@string/add_element" />
 
         <Button
+            style="@style/btn_styles"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/update_element" />
 
     </LinearLayout>
 

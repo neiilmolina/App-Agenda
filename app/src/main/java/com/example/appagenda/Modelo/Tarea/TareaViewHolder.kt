@@ -1,19 +1,21 @@
 package com.example.appagenda.Modelo.Tarea
 
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appagenda.R
 import com.example.appagenda.databinding.ItemTareaBinding
 
 class TareaViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    
-//    private val binding: ItemTareaBinding?= null
 
-    private val tvTitulo: TextView = view.findViewById(R.id.tvTitulo)
-    private val tvFecha: TextView = view.findViewById(R.id.tvFecha)
-    fun render(tarea: Tarea){
-        tvTitulo.text = tarea.titulo
-        tvFecha.text = tarea.fecha.toString()
+    // referencia de la vista
+    private val binding: ItemTareaBinding = ItemTareaBinding.bind(view)
+
+    /**
+     * funcion donde se realiza el item
+     * tambien se inicializa el evento
+     */
+    fun render(tarea: Tarea, onItemSelected: (Int) -> Unit){
+        binding.tvTitulo.text = tarea.titulo
+        binding.tvFecha.text = tarea.fecha.toString()
+        binding.tvTitulo.setOnClickListener{ onItemSelected }
     }
 }
