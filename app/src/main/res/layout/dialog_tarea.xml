@@ -15,23 +15,23 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="30sp"
-        tools:text="Titulo" />
+        android:text="@string/dialog_title" />
 
     <EditText
         android:id="@+id/etTitulo"
         style="@style/dialog_tarea_item"
-        android:hint="Titulo"
+        android:hint="@string/title_element"
         tools:text="Titulo" />
 
     <EditText
         android:id="@+id/etFecha"
         style="@style/dialog_tarea_item"
-        android:hint="Fecha" />
+        android:hint="@string/date_element" />
 
     <EditText
         android:id="@+id/etDescripcion"
         style="@style/dialog_tarea_item"
-        android:hint="Descripcion" />
+        android:hint="@string/description_element" />
 
     <Button
         android:id="@+id/btnDialogTarea"
@@ -39,5 +39,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        tools:text="Funcionalidad" />
+        android:text="@string/add_element" />
 </LinearLayout>

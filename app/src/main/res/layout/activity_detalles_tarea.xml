@@ -7,8 +7,8 @@
     android:padding="10dp"
     tools:context=".ui.DetallesTarea.DetallesTareaActivity">
 
-    <TextView
-        android:id="@+id/tvTitulo"
+    <EditText
+        android:id="@+id/etTitulo"
         style="@style/detalles_tarea_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,24 +19,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Titulo" />
 
-    <TextView
-        android:id="@+id/tvFecha"
+    <EditText
+        android:id="@+id/etFecha"
         style="@style/detalles_tarea_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
+        app:layout_constraintTop_toBottomOf="@+id/etTitulo"
         tools:text="2024-03-04" />
 
-    <TextView
-        android:id="@+id/tvDescripcion"
+    <EditText
+        android:id="@+id/etDescripcion"
         style="@style/detalles_tarea_item"
         android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:gravity="top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvFecha"
+        app:layout_constraintTop_toBottomOf="@+id/etFecha"
         tools:text="Descripcion" />
 
     <LinearLayout
@@ -47,16 +48,18 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDescripcion">
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion">
 
         <Button
+            android:id="@+id/btnEliminar"
             style="@style/btn_styles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
-            android:text="@string/add_element" />
+            android:text="@string/delete_element" />
 
         <Button
+            android:id="@+id/btnEditar"
             style="@style/btn_styles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

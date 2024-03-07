@@ -31,12 +31,31 @@ class DetallesTareaActivity : AppCompatActivity() {
         val tarea = listaTareasViewModel!!.listaTarea[posicion]
         crearUI(tarea)
 
+        binding.btnEditar.setOnClickListener{
+            listaTareasViewModel!!.editTareas(getTarea(tarea.id))
+            crearUI(getTarea(tarea.id))
+        }
+        binding.btnEliminar.setOnClickListener{
+            listaTareasViewModel!!.deleteTarea(tarea)
+            finish()
+        }
     }
 
-    private fun crearUI(tarea:Tarea){
-        binding.tvTitulo.text = tarea.titulo
-        binding.tvFecha.text = tarea.fecha.toString()
-        binding.tvDescripcion.text = tarea.descripcion
+
+    private fun crearUI(tarea: Tarea) {
+        binding.etTitulo.setText(tarea.titulo)
+        binding.etFecha.setText(tarea.fecha.toString())
+        binding.etDescripcion.setText(tarea.descripcion)
     }
+
+    private fun getTarea (id:Int): Tarea {
+        val titulo = binding.etTitulo.text.toString()
+        val fecha = binding.etFecha.text.toString()
+        val descripcion = binding.etDescripcion.text.toString()
+
+        return Tarea(id,titulo,null, descripcion)
+    }
+
+
 }
 

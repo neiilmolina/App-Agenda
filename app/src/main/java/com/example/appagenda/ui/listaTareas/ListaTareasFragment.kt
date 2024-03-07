@@ -70,15 +70,12 @@ class ListaTareasFragment : Fragment() {
     private fun showDialog() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_tarea)
-
-        val tvTitulo: TextView = dialog.findViewById(R.id.tvTitulo)
         val btnDialogTarea: Button = dialog.findViewById(R.id.btnDialogTarea)
         val etTitulo: EditText = dialog.findViewById(R.id.etTitulo)
         val etFecha: EditText = dialog.findViewById(R.id.etFecha)
         val etDescripcion: EditText = dialog.findViewById(R.id.etDescripcion)
         var id: Int = 1
 
-        tvTitulo.text = "Añade una tarea"
         btnDialogTarea.text = "Añadir"
         if (listaTareasViewModel?.listaTarea?.size!! > 0) {
             id = listaTareasViewModel!!.listaTarea.last().id + 1
@@ -89,13 +86,18 @@ class ListaTareasFragment : Fragment() {
             val tarea = Tarea(id, etTitulo.text.toString(), null, etDescripcion.text.toString())
 
             // Añadir la tarea al ViewModel
-            listaTareasViewModel!!.addTareas(tarea)
+            listaTareasViewModel!!.addTarea(tarea)
 
             // Notificar al adaptador que se ha añadido una nueva tarea
             binding.rvListaTareas.adapter?.notifyDataSetChanged()
 
             // Cerrar el diálogo
             dialog.dismiss()
+        }
+
+        dialog.setOnDismissListener {
+            // Refrescar el RecyclerView después de cerrar el diálogo
+            binding.rvListaTareas.adapter?.notifyItemInserted(listaTareasViewModel!!.listaTarea.size - 1)
         }
 
         dialog.show()

@@ -26,21 +26,26 @@ class ListaTareasViewModel : ViewModel() {
      * @param tareaEditada parametro el cual sirve como modelo para la tarea que se va a editar
      */
 
-    public fun editTareas(tareaEditada:Tarea){
-        val tareaIndex: Tarea? = _listaTareas.find { tarea -> tarea.id == tareaEditada.id }
-
-        if (tareaIndex != null) {
-            tareaIndex.titulo = tareaEditada.titulo
-            tareaIndex.fecha = tareaEditada.fecha
-            tareaIndex.descripcion = tareaEditada.descripcion
+    fun editTareas(tareaEditada: Tarea) {
+        val tareaIndex = _listaTareas.indexOfFirst { tarea -> tarea.id == tareaEditada.id }
+        if (tareaIndex != -1) {
+            _listaTareas[tareaIndex].apply {
+                titulo = tareaEditada.titulo
+                fecha = tareaEditada.fecha
+                descripcion = tareaEditada.descripcion
+            }
         }
+    }
+
+    fun deleteTarea(tareaEliminar: Tarea){
+        _listaTareas.removeIf { tarea -> tarea.id == tareaEliminar.id }
     }
 
     /**
      * Metodo el cual añade una nueva tarea en la lista de tareas
      * @param tarea modelo de tarea para añadir a la lista
      */
-    public fun addTareas(tarea: Tarea){
+    fun addTarea(tarea: Tarea){
         val add = _listaTareas.add(tarea)
         var mensaje = "Error al añadir la tarea"
         if(add) mensaje = "Tarea añadida"
@@ -48,4 +53,6 @@ class ListaTareasViewModel : ViewModel() {
 //        val toast = Toast.makeText(context, mensaje, Toast.LENGTH_SHORT)
 //        toast.show()
     }
+
+
 }
