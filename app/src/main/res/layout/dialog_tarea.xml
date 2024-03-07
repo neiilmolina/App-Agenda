@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_dialog_tareas"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        tools:text="Titulo" />
+
+    <EditText
+        android:id="@+id/etTitulo"
+        style="@style/dialog_tarea_item"
+        android:hint="Titulo"
+        tools:text="Titulo" />
+
+    <EditText
+        android:id="@+id/etFecha"
+        style="@style/dialog_tarea_item"
+        android:hint="Fecha" />
+
+    <EditText
+        android:id="@+id/etDescripcion"
+        style="@style/dialog_tarea_item"
+        android:hint="Descripcion" />
+
+    <Button
+        android:id="@+id/btnDialogTarea"
+        style="@style/btn_styles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        tools:text="Funcionalidad" />
+</LinearLayout>

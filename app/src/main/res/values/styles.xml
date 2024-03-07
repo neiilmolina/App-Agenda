@@ -36,7 +36,14 @@
         <item name="android:layout_marginTop">20dp</item>
     </style>
 
-
+    <!-- Dialog items tarea -->
+    <style name="dialog_tarea_item">
+        <item name="android:background">@drawable/border_detalles_tarea</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <!-- Dark Buttons -->
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/grey_500</item>

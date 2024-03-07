@@ -16,6 +16,6 @@ class TareaViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     fun render(tarea: Tarea, onItemSelected: (Int) -> Unit){
         binding.tvTitulo.text = tarea.titulo
         binding.tvFecha.text = tarea.fecha.toString()
-        binding.tvTitulo.setOnClickListener{ onItemSelected }
+        binding.root.setOnClickListener{ onItemSelected(adapterPosition) }
     }
 }
