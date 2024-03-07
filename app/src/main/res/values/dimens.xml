@@ -8,4 +8,9 @@
     <dimen name="field_width_standard">160dp</dimen>
     <dimen name="radioBorder">10dp</dimen>
     <dimen name="button_horizontal_margin">8dp</dimen>
+
+    <!-- EditText dimens-->
+    <dimen name="margin_bottom">20dp</dimen>
+    <dimen name="margin_top">10dp</dimen>
+    <dimen name="edit_text_size">55dp</dimen>
 </resources>
