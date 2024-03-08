@@ -4,13 +4,13 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.Modelo.Tarea.TareaAdapter
@@ -82,25 +82,26 @@ class ListaTareasFragment : Fragment() {
         }
 
         btnDialogTarea.setOnClickListener {
+            val fechaString = etFecha.toString()
+            val fecha = Tarea.parsearFecha(requireContext(),fechaString)
             // Crear la tarea con los valores actuales de los EditText
-            val tarea = Tarea(id, etTitulo.text.toString(), null, etDescripcion.text.toString())
+            val tarea = Tarea(id, etTitulo.text.toString(), fecha, fechaString, etDescripcion.text.toString())
 
             // Añadir la tarea al ViewModel
             listaTareasViewModel!!.addTarea(tarea)
 
-            // Notificar al adaptador que se ha añadido una nueva tarea
-            binding.rvListaTareas.adapter?.notifyDataSetChanged()
+            listaTareasViewModel!!.listaTarea.forEach{ tarea -> Log.i("NEil", tarea.id.toString()) }
+
+            // Recrear el adaptador con la nueva lista de tareas
+            binding.rvListaTareas.adapter = TareaAdapter(listaTareasViewModel!!.listaTarea) { position -> navegarDetallesTarea(position) }
 
             // Cerrar el diálogo
             dialog.dismiss()
         }
 
-        dialog.setOnDismissListener {
-            // Refrescar el RecyclerView después de cerrar el diálogo
-            binding.rvListaTareas.adapter?.notifyItemInserted(listaTareasViewModel!!.listaTarea.size - 1)
-        }
-
         dialog.show()
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.example.appagenda.ui.DetallesTarea
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -44,16 +43,18 @@ class DetallesTareaActivity : AppCompatActivity() {
 
     private fun crearUI(tarea: Tarea) {
         binding.etTitulo.setText(tarea.titulo)
-        binding.etFecha.setText(tarea.fecha.toString())
+        binding.etFecha.setText(tarea.fechaString)
         binding.etDescripcion.setText(tarea.descripcion)
     }
 
     private fun getTarea (id:Int): Tarea {
         val titulo = binding.etTitulo.text.toString()
-        val fecha = binding.etFecha.text.toString()
+        val fechaString = binding.etFecha.text.toString()
+        val fecha = Tarea.parsearFecha(this,fechaString)
         val descripcion = binding.etDescripcion.text.toString()
 
-        return Tarea(id,titulo,null, descripcion)
+
+        return Tarea(id,titulo,fecha, fechaString, descripcion)
     }
 
 
