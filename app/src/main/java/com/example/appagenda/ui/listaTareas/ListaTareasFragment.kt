@@ -1,5 +1,7 @@
 package com.example.appagenda.ui.listaTareas
 
+import ListaTareasViewModel
+import TareasRespositorio
 import android.app.Dialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -11,13 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.Modelo.Tarea.TareaAdapter
 import com.example.appagenda.R
 import com.example.appagenda.databinding.FragmentListaTareasBinding
 import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity
-import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.TAREA_ID
+import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.POSICION_TAREA
 
 class ListaTareasFragment : Fragment() {
 
@@ -39,7 +42,7 @@ class ListaTareasFragment : Fragment() {
         binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
         // inicializar el adapter
         binding.rvListaTareas.adapter =
-            TareaAdapter(listaTareasViewModel!!.listaTarea) { position -> navegarDetallesTarea(position) }
+            TareaAdapter(listaTareasViewModel!!.listaTareas) { position -> navegarDetallesTarea(position) }
 
         initEvents()
         val root: View = binding.root
@@ -63,7 +66,7 @@ class ListaTareasFragment : Fragment() {
      *  */
     private fun navegarDetallesTarea(posicion: Int) {
         val intent = Intent(requireContext(), DetallesTareaActivity::class.java)
-        intent.putExtra(TAREA_ID, posicion)
+        intent.putExtra(POSICION_TAREA, posicion)
         startActivity(intent)
     }
 
@@ -74,33 +77,27 @@ class ListaTareasFragment : Fragment() {
         val etTitulo: EditText = dialog.findViewById(R.id.etTitulo)
         val etFecha: EditText = dialog.findViewById(R.id.etFecha)
         val etDescripcion: EditText = dialog.findViewById(R.id.etDescripcion)
-        var id: Int = 1
 
         btnDialogTarea.text = "Añadir"
-        if (listaTareasViewModel?.listaTarea?.size!! > 0) {
-            id = listaTareasViewModel!!.listaTarea.last().id + 1
-        }
 
         btnDialogTarea.setOnClickListener {
-            val fechaString = etFecha.toString()
-            val fecha = Tarea.parsearFecha(requireContext(),fechaString)
-            // Crear la tarea con los valores actuales de los EditText
-            val tarea = Tarea(id, etTitulo.text.toString(), fecha, fechaString, etDescripcion.text.toString())
+            val titulo = etTitulo.text.toString()
+            val descripcion = etDescripcion.text.toString()
+            val fechaString = etFecha.text.toString()
+            val fecha = Tarea.parsearFecha(requireContext(), fechaString)
 
-            // Añadir la tarea al ViewModel
-            listaTareasViewModel!!.addTarea(tarea)
-
-            listaTareasViewModel!!.listaTarea.forEach{ tarea -> Log.i("NEil", tarea.id.toString()) }
-
-            // Recrear el adaptador con la nueva lista de tareas
-            binding.rvListaTareas.adapter = TareaAdapter(listaTareasViewModel!!.listaTarea) { position -> navegarDetallesTarea(position) }
-
-            // Cerrar el diálogo
-            dialog.dismiss()
+            if (titulo.isNotEmpty() && descripcion.isNotEmpty() && fecha != null) {
+                TareasRespositorio.agregarTarea(titulo, descripcion, fecha)
+                dialog.dismiss()
+            } else {
+                // Mostrar un mensaje de error si falta algún dato
+                Toast.makeText(requireContext(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         dialog.show()
     }
+
 
 
 

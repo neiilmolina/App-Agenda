@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 data class Tarea(
-    var id: Int,
+    var id: String,
     var titulo: String,
     var fecha: Date?,
     var fechaString: String?,

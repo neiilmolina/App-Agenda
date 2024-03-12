@@ -1,12 +1,13 @@
 package com.example.appagenda.ui.DetallesTarea
 
+import ListaTareasViewModel
+import TareasRespositorio
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.R
 import com.example.appagenda.databinding.ActivityDetallesTareaBinding
-import com.example.appagenda.ui.listaTareas.ListaTareasViewModel
 
 class DetallesTareaActivity : AppCompatActivity() {
 
@@ -15,7 +16,7 @@ class DetallesTareaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetallesTareaBinding
     companion object {
-        const val TAREA_ID= "tarea_id"
+        const val POSICION_TAREA= "tarea_id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +27,24 @@ class DetallesTareaActivity : AppCompatActivity() {
         listaTareasViewModel =
             ViewModelProvider(this).get(ListaTareasViewModel::class.java)
 
-        val posicion: Int = intent.getIntExtra(TAREA_ID,-1)
-        val tarea = listaTareasViewModel!!.listaTarea[posicion]
+        val posicion: Int = intent.getIntExtra(POSICION_TAREA,-1)
+        val tarea = listaTareasViewModel!!.listaTareas[posicion]
         crearUI(tarea)
 
         binding.btnEditar.setOnClickListener{
-            listaTareasViewModel!!.editTareas(getTarea(tarea.id))
-            crearUI(getTarea(tarea.id))
+            val nuevaTarea = getTarea(tarea.id)
+            nuevaTarea.fecha?.let { it1 ->
+                TareasRespositorio.actualizarTarea(
+                    nuevaTarea.id,
+                    nuevaTarea.titulo,
+                    nuevaTarea.descripcion,
+                    it1
+                )
+            }
+            crearUI(nuevaTarea)
         }
         binding.btnEliminar.setOnClickListener{
-            listaTareasViewModel!!.deleteTarea(tarea)
+            TareasRespositorio.eliminarTarea(tarea.id)
             finish()
         }
     }
@@ -47,7 +56,7 @@ class DetallesTareaActivity : AppCompatActivity() {
         binding.etDescripcion.setText(tarea.descripcion)
     }
 
-    private fun getTarea (id:Int): Tarea {
+    private fun getTarea (id:String): Tarea {
         val titulo = binding.etTitulo.text.toString()
         val fechaString = binding.etFecha.text.toString()
         val fecha = Tarea.parsearFecha(this,fechaString)
