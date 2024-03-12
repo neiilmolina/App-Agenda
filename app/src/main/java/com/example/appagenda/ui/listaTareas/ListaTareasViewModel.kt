@@ -1,25 +1,31 @@
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.appagenda.Modelo.Tarea.Tarea
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListaTareasViewModel : ViewModel() {
-    // Atributo privado para almacenar la lista de tareas
+
     private var _listaTareas: List<Tarea> = emptyList()
 
-    // Getter público para acceder a la lista de tareas
-    val listaTareas = _listaTareas
-
     init {
-        // Llamar a la función obtenerTareas desde el constructor
         obtenerTareas()
     }
 
-    /**
-     * Obtiene la lista de tareas desde Firestore y la almacena en el atributo privado _listaTareas.
-     */
     private fun obtenerTareas() {
-        TareasRespositorio.obtenerTareas { listaTareas ->
-            _listaTareas = listaTareas
-            // Aquí puedes realizar cualquier acción adicional después de obtener las tareas
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val tareas = TareasRespositorio.obtenerTareas()
+                _listaTareas = tareas
+            } catch (e: Exception) {
+                // Manejar errores, por ejemplo, loggear el error
+                e.printStackTrace()
+            }
         }
+    }
+
+    // Método para obtener la lista de tareas, ya sea directamente o mediante LiveData si lo prefieres
+    fun obtenerListaTareas(): List<Tarea> {
+        return _listaTareas
     }
 }

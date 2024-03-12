@@ -1,54 +1,68 @@
-package com.example.appagenda.ui.DetallesTarea
-
-import ListaTareasViewModel
-import TareasRespositorio
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.appagenda.Modelo.Tarea.Tarea
-import com.example.appagenda.R
 import com.example.appagenda.databinding.ActivityDetallesTareaBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class DetallesTareaActivity : AppCompatActivity() {
 
-    private var listaTareasViewModel: ListaTareasViewModel ?=null
-
-
+    private lateinit var listaTareasViewModel: ListaTareasViewModel
     private lateinit var binding: ActivityDetallesTareaBinding
+    private var tareaId: String = ""
+
     companion object {
-        const val POSICION_TAREA= "tarea_id"
+        const val POSICION_TAREA = "tarea_id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detalles_tarea)
         binding = ActivityDetallesTareaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        listaTareasViewModel =
-            ViewModelProvider(this).get(ListaTareasViewModel::class.java)
 
-        val posicion: Int = intent.getIntExtra(POSICION_TAREA,-1)
-        val tarea = listaTareasViewModel!!.listaTareas[posicion]
-        crearUI(tarea)
+        listaTareasViewModel = ViewModelProvider(this).get(ListaTareasViewModel::class.java)
 
-        binding.btnEditar.setOnClickListener{
-            val nuevaTarea = getTarea(tarea.id)
-            nuevaTarea.fecha?.let { it1 ->
-                TareasRespositorio.actualizarTarea(
-                    nuevaTarea.id,
-                    nuevaTarea.titulo,
-                    nuevaTarea.descripcion,
-                    it1
-                )
-            }
-            crearUI(nuevaTarea)
+        val posicion: Int = intent.getIntExtra(POSICION_TAREA, -1)
+        if (posicion != -1 ) {
+            val listaTarea = listaTareasViewModel.obtenerListaTareas()
+            val tarea = listaTarea[posicion]
+            tareaId = tarea.id
+            crearUI(tarea)
         }
-        binding.btnEliminar.setOnClickListener{
-            TareasRespositorio.eliminarTarea(tarea.id)
-            finish()
+
+
+        binding.btnEditar.setOnClickListener {
+            val nuevaTarea = getTarea(tareaId)
+            nuevaTarea.fecha?.let { it1 ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    try {
+                        TareasRespositorio.actualizarTarea(
+                            nuevaTarea.id,
+                            nuevaTarea.titulo,
+                            nuevaTarea.descripcion,
+                            it1
+                        )
+                        crearUI(nuevaTarea)
+                    } catch (e: Exception) {
+                        // Handle error
+                    }
+                }
+            }
+        }
+
+        binding.btnEliminar.setOnClickListener {
+            GlobalScope.launch(Dispatchers.Main) {
+                try {
+                    TareasRespositorio.eliminarTarea(tareaId)
+                    finish()
+                } catch (e: Exception) {
+                    // Handle error
+                }
+            }
         }
     }
-
 
     private fun crearUI(tarea: Tarea) {
         binding.etTitulo.setText(tarea.titulo)
@@ -56,16 +70,12 @@ class DetallesTareaActivity : AppCompatActivity() {
         binding.etDescripcion.setText(tarea.descripcion)
     }
 
-    private fun getTarea (id:String): Tarea {
+    private fun getTarea(id: String): Tarea {
         val titulo = binding.etTitulo.text.toString()
         val fechaString = binding.etFecha.text.toString()
-        val fecha = Tarea.parsearFecha(this,fechaString)
+        val fecha = Tarea.parsearFecha(this, fechaString)
         val descripcion = binding.etDescripcion.text.toString()
 
-
-        return Tarea(id,titulo,fecha, fechaString, descripcion)
+        return Tarea(id, titulo, fecha, fechaString, descripcion)
     }
-
-
 }
-

@@ -1,5 +1,7 @@
 package com.example.appagenda.ui.listaTareas
 
+import DetallesTareaActivity
+import DetallesTareaActivity.Companion.POSICION_TAREA
 import ListaTareasViewModel
 import TareasRespositorio
 import android.app.Dialog
@@ -14,13 +16,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.Modelo.Tarea.TareaAdapter
 import com.example.appagenda.R
 import com.example.appagenda.databinding.FragmentListaTareasBinding
-import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity
-import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.POSICION_TAREA
+import kotlinx.coroutines.launch
+import java.util.Date
 
 class ListaTareasFragment : Fragment() {
 
@@ -42,7 +45,7 @@ class ListaTareasFragment : Fragment() {
         binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
         // inicializar el adapter
         binding.rvListaTareas.adapter =
-            TareaAdapter(listaTareasViewModel!!.listaTareas) { position -> navegarDetallesTarea(position) }
+            TareaAdapter(listaTareasViewModel!!.obtenerListaTareas()) { position -> navegarDetallesTarea(position) }
 
         initEvents()
         val root: View = binding.root
@@ -78,8 +81,6 @@ class ListaTareasFragment : Fragment() {
         val etFecha: EditText = dialog.findViewById(R.id.etFecha)
         val etDescripcion: EditText = dialog.findViewById(R.id.etDescripcion)
 
-        btnDialogTarea.text = "Añadir"
-
         btnDialogTarea.setOnClickListener {
             val titulo = etTitulo.text.toString()
             val descripcion = etDescripcion.text.toString()
@@ -87,7 +88,7 @@ class ListaTareasFragment : Fragment() {
             val fecha = Tarea.parsearFecha(requireContext(), fechaString)
 
             if (titulo.isNotEmpty() && descripcion.isNotEmpty() && fecha != null) {
-                TareasRespositorio.agregarTarea(titulo, descripcion, fecha)
+                agregarTareaConCoroutines(titulo, descripcion, fecha)
                 dialog.dismiss()
             } else {
                 // Mostrar un mensaje de error si falta algún dato
@@ -96,6 +97,20 @@ class ListaTareasFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    private fun agregarTareaConCoroutines(titulo: String, descripcion: String, fecha: Date) {
+        // Utilizamos viewModelScope.launch para lanzar una coroutine en el contexto del ViewModel
+        // Esto asegura que la coroutine sea cancelada automáticamente cuando el ViewModel se destruye
+        listaTareasViewModel?.viewModelScope?.launch {
+            try {
+                // Llamamos a la función asíncrona agregarTarea del repositorio y esperamos su resultado
+                TareasRespositorio.agregarTarea(titulo, descripcion, fecha)
+            } catch (e: Exception) {
+                // Manejar errores, por ejemplo, loggear el error
+                e.printStackTrace()
+            }
+        }
     }
 
 
