@@ -1,5 +1,6 @@
 import android.util.Log
 import com.example.appagenda.Modelo.Tarea.Tarea
+import com.example.appagenda.Modelo.Tarea.TareaAdapter
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.util.*
@@ -10,7 +11,7 @@ object TareasRespositorio {
 
     private val db = FirebaseFirestore.getInstance()
 
-    suspend fun agregarTarea(titulo: String, descripcion: String, fecha: Date) {
+    suspend fun agregarTarea(titulo: String, descripcion: String, fecha: Date,tareaAdapter:TareaAdapter ) {
         val tarea = hashMapOf(
             "titulo" to titulo,
             "descripcion" to descripcion,
@@ -19,6 +20,7 @@ object TareasRespositorio {
 
         try {
             val documentReference = db.collection(COLLECTION_PATH).add(tarea).await()
+            tareaAdapter.notifyDataSetChanged()
             Log.d(TAG, "Tarea agregada con ID: ${documentReference.id}")
         } catch (e: Exception) {
             Log.w(TAG, "Error al agregar tarea", e)
@@ -41,6 +43,7 @@ object TareasRespositorio {
                     fechaString = Tarea.convertirFechaString(fecha)
                 )
                 listaTareas.add(tarea)
+                Log.i(TAG, "Indice " + listaTareas.lastIndex.toString())
             }
         } catch (e: Exception) {
             Log.e(TAG, "Error al obtener tareas", e)

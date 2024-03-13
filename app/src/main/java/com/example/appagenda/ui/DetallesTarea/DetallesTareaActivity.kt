@@ -1,6 +1,12 @@
+package com.example.appagenda.ui.DetallesTarea
+
+import ListaTareasViewModel
+import TareasRespositorio
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.appagenda.R
 import androidx.lifecycle.ViewModelProvider
+import com.example.appagenda.MainActivity
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.databinding.ActivityDetallesTareaBinding
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +28,7 @@ class DetallesTareaActivity : AppCompatActivity() {
         binding = ActivityDetallesTareaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        listaTareasViewModel = ViewModelProvider(this).get(ListaTareasViewModel::class.java)
+        listaTareasViewModel = MainActivity.listaTareasViewModel
 
         val posicion: Int = intent.getIntExtra(POSICION_TAREA, -1)
         if (posicion != -1 ) {

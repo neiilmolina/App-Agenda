@@ -1,14 +1,10 @@
 package com.example.appagenda.ui.listaTareas
 
-import DetallesTareaActivity
-import DetallesTareaActivity.Companion.POSICION_TAREA
 import ListaTareasViewModel
 import TareasRespositorio
 import android.app.Dialog
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +14,13 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.appagenda.MainActivity
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.Modelo.Tarea.TareaAdapter
 import com.example.appagenda.R
 import com.example.appagenda.databinding.FragmentListaTareasBinding
+import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity
+import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.POSICION_TAREA
 import kotlinx.coroutines.launch
 import java.util.Date
 
@@ -31,21 +30,24 @@ class ListaTareasFragment : Fragment() {
 
     private var _binding: FragmentListaTareasBinding? = null
 
+    private lateinit var tareaAdapter: TareaAdapter
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-        listaTareasViewModel =
-            ViewModelProvider(this).get(ListaTareasViewModel::class.java)
+        listaTareasViewModel = MainActivity.listaTareasViewModel
 
         _binding = FragmentListaTareasBinding.inflate(inflater, container, false)
 
         // colocar los elementos de la lista
         binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
         // inicializar el adapter
-        binding.rvListaTareas.adapter =
+        tareaAdapter =
             TareaAdapter(listaTareasViewModel!!.obtenerListaTareas()) { position -> navegarDetallesTarea(position) }
+
+        binding.rvListaTareas.adapter = tareaAdapter
 
         initEvents()
         val root: View = binding.root
@@ -105,7 +107,7 @@ class ListaTareasFragment : Fragment() {
         listaTareasViewModel?.viewModelScope?.launch {
             try {
                 // Llamamos a la función asíncrona agregarTarea del repositorio y esperamos su resultado
-                TareasRespositorio.agregarTarea(titulo, descripcion, fecha)
+                TareasRespositorio.agregarTarea(titulo, descripcion, fecha, tareaAdapter)
             } catch (e: Exception) {
                 // Manejar errores, por ejemplo, loggear el error
                 e.printStackTrace()
