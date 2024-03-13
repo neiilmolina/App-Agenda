@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.example.appagenda.MainActivity
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.databinding.ActivityDetallesTareaBinding
+import com.example.appagenda.ui.listaTareas.ListaTareasFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -43,14 +44,16 @@ class DetallesTareaActivity : AppCompatActivity() {
                 nuevaTarea.fecha?.let { it1 ->
                     GlobalScope.launch(Dispatchers.Main) {
                         try {
-                            TareasRespositorio.actualizarTarea(
-                                nuevaTarea.id,
-                                nuevaTarea.titulo,
-                                nuevaTarea.descripcion,
-                                it1
-                            )
                             if (nuevaTarea != null) {
                                 crearUI(nuevaTarea)
+                                TareasRespositorio.actualizarTarea(
+                                    nuevaTarea.id,
+                                    nuevaTarea.titulo,
+                                    nuevaTarea.descripcion,
+                                    it1
+                                )
+                                listaTareasViewModel.editTarea(nuevaTarea)
+                                ListaTareasFragment.tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
                             }
                         } catch (e: Exception) {
                             // Handle error
@@ -64,6 +67,8 @@ class DetallesTareaActivity : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.Main) {
                 try {
                     TareasRespositorio.eliminarTarea(tareaId)
+                    listaTareasViewModel.eliminarTarea(tareaId)
+                    ListaTareasFragment.tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
                     finish()
                 } catch (e: Exception) {
                     // Handle error

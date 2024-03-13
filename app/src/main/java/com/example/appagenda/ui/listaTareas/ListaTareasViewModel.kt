@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 
 class ListaTareasViewModel : ViewModel() {
 
-    private var _listaTareas: List<Tarea> = emptyList()
+    private var _listaTareas: List<Tarea> = mutableListOf()
 
     init {
         obtenerTareas()
@@ -24,7 +24,6 @@ class ListaTareasViewModel : ViewModel() {
         }
     }
 
-    // Método para obtener la lista de tareas, ya sea directamente o mediante LiveData si lo prefieres
     fun obtenerListaTareas(): List<Tarea> {
         return _listaTareas
     }
@@ -36,4 +35,15 @@ class ListaTareasViewModel : ViewModel() {
     fun addTareas(tarea: Tarea){
         _listaTareas = _listaTareas.plus(tarea)
     }
+
+    fun editTarea(tarea: Tarea){
+        _listaTareas = _listaTareas.map { t ->
+            if (t.id == tarea.id) tarea else t
+        }.toMutableList()
+    }
+
+    fun eliminarTarea(idTarea: String) {
+        _listaTareas = _listaTareas.filter { t -> t.id != idTarea }.toMutableList()
+    }
+
 }

@@ -30,7 +30,9 @@ class ListaTareasFragment : Fragment() {
 
     private var _binding: FragmentListaTareasBinding? = null
 
-    private lateinit var tareaAdapter: TareaAdapter
+    companion object{
+        lateinit var tareaAdapter: TareaAdapter
+    }
 
     private val binding get() = _binding!!
 
