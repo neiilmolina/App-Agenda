@@ -7,10 +7,14 @@
     <string name="title_login">Iniciar sesion</string>
     <string name="title_register">Registro</string>
     <string name="require_mail">Introduce el correo</string>
+    <string name="require_name">Introduce tu nombre</string>
+    <string name="require_age">Introduce tu edad</string>
     <string name="require_pass">Introduce la contraseña</string>
     <string name="create_account">Crear Cuenta</string>
     <string name="hint_email">mail@example.com</string>
     <string name="hint_password">qwerty123</string>
+    <string name="hint_name">nombre</string>
+    <string name="hint_age">00</string>
     <string name="dark_enabled">Claro</string>
     <string name="light_enabled">Oscuro</string>
 
@@ -19,4 +23,13 @@
     <string name="delete_element">Eliminar</string>
     <string name="update_element">Editar</string>
     <string name="select_element">Seleccionar</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentLogin"
+    android:id="@+id/fragmentRegistro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -22,24 +22,24 @@
             android:layout_margin="10dp">
 
             <TextView
-                android:id="@+id/tvTitulo"
+                android:id="@+id/tvTituloRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@string/title_login"
+                android:text="@string/title_register"
                 style="@style/ThemeOverlay.MyTitleText"
                 />
 
             <TextView
-                android:id="@+id/pedirCorreo"
+                android:id="@+id/pedirNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/require_mail"
+                android:text="@string/require_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitulo"
+                app:layout_constraintTop_toBottomOf="@id/tvTituloRegistro"
                 android:layout_marginTop="40dp"
                 />
             <EditText
@@ -48,18 +48,41 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pedirCorreo"
-                android:hint="@string/hint_email"
+                app:layout_constraintTop_toBottomOf="@id/pedirNombre"
+                android:hint="@string/hint_name"
                 style="@style/modifiedEditText"
                 />
+
             <TextView
-                android:id="@+id/pedirPass"
+                android:id="@+id/pedirEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/require_age"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                android:layout_marginTop="40dp"
+                />
+            <EditText
+                android:id="@+id/etEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pedirEdad"
+                android:inputType="number"
+                android:hint="@string/hint_age"
+                style="@style/modifiedEditText"
+                />
+
+            <TextView
+                android:id="@+id/pedirPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/require_pass"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etEmail"
+                app:layout_constraintTop_toBottomOf="@id/etEdad"
                 android:layout_marginTop="40dp"
                 />
             <EditText
@@ -68,50 +91,45 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pedirPass"
+                app:layout_constraintTop_toBottomOf="@id/pedirPassword"
+                android:hint="@string/hint_password"
+                style="@style/modifiedEditText"
+                />
+
+            <TextView
+                android:id="@+id/pedirRepetirPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/require_pass"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                android:layout_marginTop="40dp"
+                />
+            <EditText
+                android:id="@+id/etRepetirPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pedirRepetirPassword"
                 android:hint="@string/hint_password"
                 style="@style/modifiedEditText"
                 />
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnRegistro"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintTop_toBottomOf="@id/etRepetirPassword"
                 android:layout_marginTop="20dp"
-                android:text="@string/title_login"
-                />
-
-            <TextView
-                android:id="@+id/tvRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnLogin"
-                android:text="¿Aun no estas registrado?"
-                android:layout_marginTop="40dp"
-                android:gravity="center"
-                />
-
-            <Button
-                android:id="@+id/btnViewRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvRegister"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
                 android:text="@string/title_register"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
