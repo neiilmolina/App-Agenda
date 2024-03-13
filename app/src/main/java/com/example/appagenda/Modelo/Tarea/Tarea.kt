@@ -8,12 +8,12 @@ import java.util.Date
 data class Tarea(
     var id: String,
     var titulo: String,
-    var fecha: Date?,
+    var fecha: Date,
     var fechaString: String?,
     var descripcion: String
 ) {
     companion object {
-        private val formatoFecha = SimpleDateFormat("yyyy-MM-dd")
+        private val formatoFecha = SimpleDateFormat("dd-MM-yyyy")
 
         fun convertirFechaString(fecha: Date): String? {
             return fecha?.let { formatoFecha.format(it) }

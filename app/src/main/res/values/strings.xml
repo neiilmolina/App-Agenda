@@ -22,5 +22,6 @@
     <string name="title_element">Titulo</string>
     <string name="description_element">Descripcion</string>
     <string name="date_element">Fecha</string>
+    <string name="date_element_dialog">Fecha (dd-MM-yyyy)</string>
     <string name="dialog_title">Añade una tarea</string>
 </resources>

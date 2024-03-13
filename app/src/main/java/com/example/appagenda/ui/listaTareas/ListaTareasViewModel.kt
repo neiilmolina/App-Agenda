@@ -12,7 +12,7 @@ class ListaTareasViewModel : ViewModel() {
         obtenerTareas()
     }
 
-    private fun obtenerTareas() {
+    fun obtenerTareas() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val tareas = TareasRespositorio.obtenerTareas()
@@ -27,5 +27,13 @@ class ListaTareasViewModel : ViewModel() {
     // Método para obtener la lista de tareas, ya sea directamente o mediante LiveData si lo prefieres
     fun obtenerListaTareas(): List<Tarea> {
         return _listaTareas
+    }
+
+    /**
+     * Metodo el cual añade una nueva tarea en la lista de tareas
+     * @param tarea modelo de tarea para añadir a la lista
+     */
+    fun addTareas(tarea: Tarea){
+        _listaTareas = _listaTareas.plus(tarea)
     }
 }

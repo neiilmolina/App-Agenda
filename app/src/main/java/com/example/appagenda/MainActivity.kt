@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-
     companion object {
         val listaTareasViewModel: ListaTareasViewModel = ListaTareasViewModel()
     }

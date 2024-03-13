@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/etFecha"
         style="@style/dialog_tarea_item"
-        android:hint="@string/date_element" />
+        android:hint="@string/date_element_dialog" />
 
     <EditText
         android:id="@+id/etDescripcion"

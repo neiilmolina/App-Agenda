@@ -43,6 +43,7 @@ class ListaTareasFragment : Fragment() {
 
         // colocar los elementos de la lista
         binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
+
         // inicializar el adapter
         tareaAdapter =
             TareaAdapter(listaTareasViewModel!!.obtenerListaTareas()) { position -> navegarDetallesTarea(position) }
@@ -53,7 +54,12 @@ class ListaTareasFragment : Fragment() {
         val root: View = binding.root
         return root
     }
-
+//    override fun onResume() {
+//        super.onResume()
+//        // Recargar la lista de tareas cada vez que el Fragmento se muestre
+//        listaTareas = listaTareasViewModel!!.obtenerListaTareas()
+//        tareaAdapter.actualizarListaTareas(listaTareas)
+//    }
     private fun initEvents(){
         binding.btnAdd.setOnClickListener{showDialog()}
     }
@@ -90,7 +96,7 @@ class ListaTareasFragment : Fragment() {
             val fecha = Tarea.parsearFecha(requireContext(), fechaString)
 
             if (titulo.isNotEmpty() && descripcion.isNotEmpty() && fecha != null) {
-                agregarTareaConCoroutines(titulo, descripcion, fecha)
+                agregarTareaConCoroutines(titulo, descripcion, fecha, listaTareasViewModel)
                 dialog.dismiss()
             } else {
                 // Mostrar un mensaje de error si falta algún dato
@@ -101,21 +107,27 @@ class ListaTareasFragment : Fragment() {
         dialog.show()
     }
 
-    private fun agregarTareaConCoroutines(titulo: String, descripcion: String, fecha: Date) {
+    private fun agregarTareaConCoroutines(
+        titulo: String,
+        descripcion: String,
+        fecha: Date,
+        listaTareasViewModel: ListaTareasViewModel?
+    ) {
         // Utilizamos viewModelScope.launch para lanzar una coroutine en el contexto del ViewModel
         // Esto asegura que la coroutine sea cancelada automáticamente cuando el ViewModel se destruye
-        listaTareasViewModel?.viewModelScope?.launch {
+        this.listaTareasViewModel?.viewModelScope?.launch {
             try {
                 // Llamamos a la función asíncrona agregarTarea del repositorio y esperamos su resultado
-                TareasRespositorio.agregarTarea(titulo, descripcion, fecha, tareaAdapter)
+                TareasRespositorio.agregarTarea(titulo, descripcion, fecha, listaTareasViewModel)
+                if (listaTareasViewModel != null) {
+                    tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
+                }
+
             } catch (e: Exception) {
                 // Manejar errores, por ejemplo, loggear el error
                 e.printStackTrace()
             }
         }
     }
-
-
-
-
 }
+
