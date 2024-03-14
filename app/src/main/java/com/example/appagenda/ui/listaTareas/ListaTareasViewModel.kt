@@ -1,25 +1,49 @@
-package com.example.appagenda.ui.listaTareas
-
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.viewModelScope
 import com.example.appagenda.Modelo.Tarea.Tarea
-import com.example.appagenda.Modelo.Tarea.TareaAdapter
-import java.util.Date
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListaTareasViewModel : ViewModel() {
-    // inicializar una lista de tareas
-    private val _listaTareas : List<Tarea> = mutableListOf<Tarea>(
-        Tarea( 1,"Prueba",Date(), "Descripcion"),
-        Tarea(2,"Prueba2", Date(), "Descripcion"),
-        Tarea(3,"Prueba3", Date(), "Descripcion"),
-        Tarea(4,"Prueba4", Date(), "Descripcion"),
-        Tarea(5,"Prueba5", Date(), "Descripcion"),
-        Tarea(6,"Prueba6", Date(), "Descripcion")
-    )
 
-    // lista publica de la lista de tareas
-    val listaTarea = _listaTareas
+    private var _listaTareas: List<Tarea> = mutableListOf()
+
+    init {
+        obtenerTareas()
+    }
+
+    fun obtenerTareas() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val tareas = TareasRespositorio.obtenerTareas()
+                _listaTareas = tareas
+            } catch (e: Exception) {
+                // Manejar errores, por ejemplo, loggear el error
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun obtenerListaTareas(): List<Tarea> {
+        return _listaTareas
+    }
+
+    /**
+     * Metodo el cual añade una nueva tarea en la lista de tareas
+     * @param tarea modelo de tarea para añadir a la lista
+     */
+    fun addTareas(tarea: Tarea){
+        _listaTareas = _listaTareas.plus(tarea)
+    }
+
+    fun editTarea(tarea: Tarea){
+        _listaTareas = _listaTareas.map { t ->
+            if (t.id == tarea.id) tarea else t
+        }.toMutableList()
+    }
+
+    fun eliminarTarea(idTarea: String) {
+        _listaTareas = _listaTareas.filter { t -> t.id != idTarea }.toMutableList()
+    }
 
 }

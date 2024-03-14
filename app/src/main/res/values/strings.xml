@@ -19,11 +19,12 @@
     <string name="light_enabled">Oscuro</string>
     <string name="btn_logout">Cerrar sesión</string>
 
-<!--CRUD Strings-->
+    <!--CRUD Strings-->
     <string name="add_element">Añadir</string>
     <string name="delete_element">Eliminar</string>
     <string name="update_element">Editar</string>
     <string name="select_element">Seleccionar</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -33,4 +34,11 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <!-- Elementos Strings -->
+    <string name="title_element">Titulo</string>
+    <string name="description_element">Descripcion</string>
+    <string name="date_element">Fecha</string>
+    <string name="date_element_dialog">Fecha (dd-MM-yyyy)</string>
+    <string name="dialog_title">Añade una tarea</string>
 </resources>
