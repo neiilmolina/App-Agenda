@@ -2,11 +2,8 @@ package com.example.appagenda.ui.DetallesTarea
 
 import ListaTareasViewModel
 import TareasRespositorio
-import TareasRespositorio.user
-import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.appagenda.MainActivity
 import com.example.appagenda.Modelo.Tarea.Tarea

@@ -2,6 +2,7 @@ import android.util.Log
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -12,14 +13,20 @@ object TareasRespositorio {
     private const val TAG = "TareasRespositorio"
 
     private val db = FirebaseFirestore.getInstance()
-    var auth: FirebaseAuth = Firebase.auth
-    val user = auth.currentUser
+    private lateinit var auth: FirebaseAuth
+
+    private fun inicializarUser(): FirebaseUser? {
+        auth = Firebase.auth
+        return auth.currentUser
+    }
+
     suspend fun agregarTarea(
         titulo: String,
         descripcion: String,
         fecha: Date,
         listaTareasViewModel: ListaTareasViewModel?
     ) {
+        val user = inicializarUser()
         val tarea = hashMapOf(
             "titulo" to titulo,
             "descripcion" to descripcion,
@@ -30,14 +37,16 @@ object TareasRespositorio {
         try {
             val documentReference = db.collection(COLLECTION_PATH).add(tarea).await()
             if (user != null) {
-                listaTareasViewModel?.addTareas(Tarea(
-                    id = documentReference.id,
-                    titulo = titulo,
-                    descripcion = descripcion,
-                    fecha = fecha,
-                    fechaString = Tarea.convertirFechaString(fecha),
-                    idUsuario = user.uid
-                ))
+                listaTareasViewModel?.addTareas(
+                    Tarea(
+                        id = documentReference.id,
+                        titulo = titulo,
+                        descripcion = descripcion,
+                        fecha = fecha,
+                        fechaString = Tarea.convertirFechaString(fecha),
+                        idUsuario = user.uid
+                    )
+                )
             }
             Log.d(TAG, "Tarea agregada con ID: ${documentReference.id}")
         } catch (e: Exception) {
@@ -47,23 +56,22 @@ object TareasRespositorio {
     }
 
     suspend fun obtenerTareas(): List<Tarea> {
+        val user = inicializarUser()
         val listaTareas = mutableListOf<Tarea>()
         try {
             val result = db.collection(COLLECTION_PATH).get().await()
             for (document in result) {
-                if (document.get("idUsuario")== user?.uid){
+                if (document.get("idUsuario") == user?.uid) {
                     val fechaTimestamp = document.getTimestamp("fecha")
                     val fecha = fechaTimestamp?.toDate() ?: Date()
-                    val tarea = user?.let {
-                        Tarea(
-                            id = document.id,
-                            titulo = document.getString("titulo") ?: "",
-                            descripcion = document.getString("descripcion") ?: "",
-                            fecha = fecha,
-                            fechaString = Tarea.convertirFechaString(fecha),
-                            idUsuario = it.uid
-                        )
-                    }
+                    val tarea = Tarea(
+                        id = document.id,
+                        titulo = document.getString("titulo") ?: "",
+                        descripcion = document.getString("descripcion") ?: "",
+                        fecha = fecha,
+                        fechaString = Tarea.convertirFechaString(fecha),
+                        idUsuario = user!!.uid
+                    )
                     if (tarea != null) {
                         listaTareas.add(tarea)
                     }
@@ -85,10 +93,10 @@ object TareasRespositorio {
         )
 
         try {
-            if (user != null) {
-                db.collection(COLLECTION_PATH).document(idTarea).set(tarea).await()
-                Log.d(TAG, "Tarea actualizada correctamente")
-            }
+
+            db.collection(COLLECTION_PATH).document(idTarea).set(tarea).await()
+            Log.d(TAG, "Tarea actualizada correctamente")
+
         } catch (e: Exception) {
             Log.w(TAG, "Error al actualizar tarea", e)
             throw e // Propagate the exception
