@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Botones -->
+    <style name="btn_styles">
+        <item name="backgroundTint">@color/background_btn</item>
+        <item name="android:textColor">@color/color_btn</item>
+    </style>
     <!-- Lista -->
 
     <!-- Item Tarea -->
-    <!-- Titulo -->
+        <!-- Titulo -->
     <style name="titulo_tarea" parent="android:Widget.TextView">
         <item name="android:textColor">@color/titulo_tarea</item>
         <item name="android:textSize">20sp</item>
         <item name="android:padding">10dp</item>
     </style>
 
-    <!-- Fecha -->
+        <!-- Fecha -->
     <style name="fecha_tarea" parent="android:Widget.TextView">
         <item name="android:textColor">@color/fecha_tarea</item>
         <item name="android:textSize">8dp</item>
@@ -23,7 +28,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Detalles tarea -->
+        <!-- Item -->
+    <style name="detalles_tarea_item">
+        <item name="android:background">@drawable/border_detalles_tarea</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
 
+    <!-- Dialog items tarea -->
+    <style name="dialog_tarea_item">
+        <item name="android:background">@drawable/border_detalles_tarea</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
     <!-- Dark Buttons -->
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/grey_500</item>

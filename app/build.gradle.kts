@@ -55,7 +55,9 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.preference:preference:1.2.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.10.3")
     testImplementation("junit:junit:4.13.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 

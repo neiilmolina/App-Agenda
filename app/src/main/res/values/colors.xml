@@ -7,9 +7,9 @@
     <color name="teal_700">#006B6B</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- btnAdd -->
-    <color name="color_btnAdd">#FFFFFFFF</color>
-    <color name="background_btnAdd">#A5A3A3</color>
+    <!-- btnColors -->
+    <color name="color_btn">#FFFFFFFF</color>
+    <color name="background_btn">#A5A3A3</color>
 
     <!-- Tarea colors -->
     <color name="border_tarea">#FF000000</color>
