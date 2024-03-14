@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -38,6 +39,18 @@ class SettingsFragment : Fragment() {
     private val binding:FragmentSettingsBinding get() = _binding!!
 
 
+
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+
+        if (currentUser != null) {
+           binding.btnLogin.isVisible = false
+        } else {
+            binding.btnLogin.isVisible = true
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -80,6 +93,8 @@ class SettingsFragment : Fragment() {
 
     private fun signOut() {
         auth.signOut()
+        onStart()
     }
+
 
 }

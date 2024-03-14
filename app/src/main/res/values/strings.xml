@@ -17,6 +17,7 @@
     <string name="hint_age">00</string>
     <string name="dark_enabled">Claro</string>
     <string name="light_enabled">Oscuro</string>
+    <string name="btn_logout">Cerrar sesión</string>
 
 <!--CRUD Strings-->
     <string name="add_element">Añadir</string>
