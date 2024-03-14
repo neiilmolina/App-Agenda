@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
@@ -47,8 +48,10 @@ class SettingsFragment : Fragment() {
 
         if (currentUser != null) {
            binding.btnLogin.isVisible = false
+            binding.btnLogout.isVisible = true
         } else {
             binding.btnLogin.isVisible = true
+            binding.btnLogout.isVisible = false
         }
     }
 
@@ -71,6 +74,22 @@ class SettingsFragment : Fragment() {
 
             btnLogout.setOnClickListener {
                 signOut()
+            }
+            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+                val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+                val newNightMode = if (isChecked) {
+                    AppCompatDelegate.MODE_NIGHT_YES
+                } else {
+                    AppCompatDelegate.MODE_NIGHT_NO
+                }
+
+                // Verificar si el nuevo modo de tema es diferente al modo de tema actual
+                if (currentNightMode != newNightMode) {
+                    // Cambiar el modo de tema
+                    AppCompatDelegate.setDefaultNightMode(newNightMode)
+                    // Recrear la actividad para que el cambio de tema surta efecto
+                    requireActivity().recreate()
+                }
             }
 /*
             btnLogin.setOnClickListener {
@@ -96,5 +115,9 @@ class SettingsFragment : Fragment() {
         onStart()
     }
 
+    fun changeTheme(themeMode: Int) {
+        AppCompatDelegate.setDefaultNightMode(themeMode)
+        requireActivity().recreate() // Recrear la actividad para que el cambio de tema surta efecto
+    }
 
 }

@@ -24,14 +24,9 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private lateinit var auth: FirebaseAuth
-
-
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding: FragmentRegisterBinding get() = _binding!!
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
@@ -108,6 +103,22 @@ class RegisterFragment : Fragment() {
             binding.etEmail.error = null
         }
 
+        val nombre = binding.etNombre.text.toString()
+        if (TextUtils.isEmpty(nombre)) {
+            binding.etNombre.error = "Required."
+            valid = false
+        } else {
+            binding.etNombre.error = null
+        }
+
+        val edad = binding.etEdad.text.toString()
+        if (TextUtils.isEmpty(edad)) {
+            binding.etEdad.error = "Required."
+            valid = false
+        } else {
+            binding.etEdad.error = null
+        }
+
         val password = binding.etPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
             binding.etPassword.error = "Required."
@@ -116,6 +127,21 @@ class RegisterFragment : Fragment() {
             binding.etPassword.error = null
         }
 
+        val repetirPassword = binding.etRepetirPassword.text.toString()
+        if (TextUtils.isEmpty(repetirPassword)) {
+            binding.etRepetirPassword.error = "Required."
+            valid = false
+        } else {
+            binding.etRepetirPassword.error = null
+        }
+
+        // Validar que la contraseña y su repetición coincidan
+        if (password != repetirPassword) {
+            binding.etRepetirPassword.error = "Passwords don't match."
+            valid = false
+        }
+
         return valid
     }
+
 }
