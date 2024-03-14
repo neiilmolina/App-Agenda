@@ -13,7 +13,7 @@ data class Tarea(
     var descripcion: String
 ) {
     companion object {
-        private val formatoFecha = SimpleDateFormat("dd-MM-yyyy")
+        private val formatoFecha = SimpleDateFormat("dd/MM/yyyy")
 
         fun convertirFechaString(fecha: Date): String? {
             return fecha?.let { formatoFecha.format(it) }
@@ -29,7 +29,7 @@ data class Tarea(
                 }
                 fecha
             } catch (e: Exception) {
-                Toast.makeText(context, "Formato de fecha inválido (dd-MM-yyyy)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Formato de fecha inválido (dd/MM/yyyy)", Toast.LENGTH_SHORT).show()
                 null
             }
         }
