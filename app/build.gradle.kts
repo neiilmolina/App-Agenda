@@ -51,11 +51,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.preference:preference:1.2.0")
     implementation("androidx.preference:preference-ktx:1.2.1")
+
+    implementation("androidx.annotation:annotation:1.7.1")
+
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.3")
+
     testImplementation("junit:junit:4.13.2")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

@@ -13,6 +13,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.databinding.ActivityMainBinding
 
+import com.example.appagenda.ui.settings.SettingsFragment
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
 }

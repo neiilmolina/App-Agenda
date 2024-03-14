@@ -1,105 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:id="@+id/register"
+    android:id="@+id/settings"
     android:padding="16dp">
+    <LinearLayout
+        android:id="@+id/darkModeSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_dark_mode" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modo oscuro"
+                android:textColor="@color/teal_700" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activa el modo oscuro para un cambio visual"
+                android:textSize="11sp" />
+        </LinearLayout>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchDarkMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp" />
+    </LinearLayout>
+
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/login_question"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/darkModeSection"
+        android:text="No se ha detectado una sesion iniciada"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-        android:textSize="@dimen/title_bottom_margin" />
-    <LinearLayout
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:layout_width="match_parent"
+        />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_question"
+        android:layout_marginTop="20dp"
+        android:text="@string/title_login"
+        />
 
-        <!-- TextView para descripción -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tema:"
-            android:textSize="18sp"
-            android:layout_gravity="start|center_vertical"
-            android:layout_weight="1"/>
-
-        <!-- ToggleButton para cambiar el tema de la aplicación -->
-        <ToggleButton
-            style="@style/ThemeOverlay.MyDarkButton"
-            android:id="@+id/toggleTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textOff="@string/light_enabled"
-            android:textOn="@string/dark_enabled"
-            android:checked="false"
-            android:textSize="18sp"
-            android:layout_gravity="end" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:background="@color/grey_500"
-
-        android:padding="20dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        android:text="¿Aun no estas registrado?"
+        android:layout_marginTop="40dp"
         android:gravity="center"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical">
+        />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="correo electronico"
-            android:textSize="24dp"
-            />
-        <EditText
-            style="@style/ThemeOverlay.MyLightEditText"
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btnViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/title_register"
+        />
 
-            android:hint="@string/hint_email"
-            android:textSize="24dp" />
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contraseña"
-            android:textSize="24dp"
-            />
-        <EditText
-            style="@style/ThemeOverlay.MyLightEditText"
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:hint="@string/hint_password"
-            android:password="true"
-            android:textSize="24dp" />
-        <Button
-            style="@style/ThemeOverlay.MyDarkButton"
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:text="@string/create_account"
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnViewRegister"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_logout"
+        />
 
-            android:textSize="18sp" />
 
-        <Button
-            style="@style/ThemeOverlay.MyDarkButton"
-            android:layout_margin="20dp"
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/login"
-            android:textSize="18sp" />
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

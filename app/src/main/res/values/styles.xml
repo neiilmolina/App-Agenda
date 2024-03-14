@@ -70,7 +70,25 @@
 
     <style name="ThemeOverlay.MyTitleText" parent="AppTheme">
         <item name="android:gravity">center</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="itemTextAppearanceActiveBoldEnabled">true</item>
     </style>
 
+    <style name="modifiedEditText">
+        <item name="android:height">@dimen/edit_text_size</item>
+        <item name="android:layout_marginTop">@dimen/margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/margin_bottom</item>
+
+    </style>
+
+    <style name="FormTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:gravity">center_vertical</item>
+        <item name="errorEnabled">true</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="boxStrokeWidth">5dp</item>
+        <item name="errorTextColor">@color/black</item>
+        <item name="hintTextColor">@color/black</item>
+    </style>
 </resources>

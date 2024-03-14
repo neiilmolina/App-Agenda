@@ -20,5 +20,15 @@
         android:name="com.example.appagenda.ui.settings.SettingsFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/vistaLog"
+        android:name="com.example.appagenda.ui.login.LoginFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/vistaRegister"
+        android:name="com.example.appagenda.ui.register.RegisterFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_register" />
 
 </navigation>
