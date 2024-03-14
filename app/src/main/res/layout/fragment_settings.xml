@@ -97,10 +97,65 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnViewRegister"
+        app:layout_constraintTop_toBottomOf="@id/btnActualizar"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btn_logout"
+        />
+
+    <TextView
+        android:id="@+id/pedirNombre2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="introduce el nuevo nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/darkModeSection"
+        android:layout_marginTop="40dp"
+        />
+    <EditText
+        android:id="@+id/new_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pedirNombre2"
+        android:hint="Nuevo nombre"
+        style="@style/modifiedEditText"
+        />
+
+    <TextView
+        android:id="@+id/pedirEdad2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="introduce tu edad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pedirNombre2"
+        android:layout_marginTop="40dp"
+        />
+    <EditText
+        android:id="@+id/new_edad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pedirEdad2"
+        android:hint="edad"
+        android:inputType="number"
+        style="@style/modifiedEditText"
+        />
+
+    <Button
+        android:id="@+id/btnActualizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_edad"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Actualizar datos"
         />
 
 

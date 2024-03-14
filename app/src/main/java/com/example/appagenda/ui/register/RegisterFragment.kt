@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.appagenda.MainActivity
 import com.example.appagenda.R
 import com.example.appagenda.databinding.FragmentLoginBinding
@@ -76,7 +77,7 @@ class RegisterFragment : Fragment() {
                         .addOnFailureListener { e ->
                             Log.w(TAG, "Error adding document", e)
                         }
-
+                    findNavController().navigate(R.id.navigation_home)
                     // acceder al usuario por medio del uid y a sus tareas
                     // db.collection("users").document(user.uid).collection("tareas").get
 
@@ -85,7 +86,7 @@ class RegisterFragment : Fragment() {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         context,
-                        "Authentication failed.",
+                        "Error en el registro   ",
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
