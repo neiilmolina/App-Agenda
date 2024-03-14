@@ -23,11 +23,13 @@ data class Tarea(
             return try {
                 val fecha = fechaString?.let { formatoFecha.parse(it) }
                 if (fecha == null) {
-                    Toast.makeText(context, "Error al parsear la fecha", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "No hay fecha", Toast.LENGTH_SHORT).show()
+                } else if(fecha < Date()){
+                    Toast.makeText(context, "La fecha tiene que se a partir de hoy", Toast.LENGTH_SHORT).show()
                 }
                 fecha
             } catch (e: Exception) {
-                Toast.makeText(context, "Error al parsear la fecha: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Formato de fecha inválido (dd-MM-yyyy)", Toast.LENGTH_SHORT).show()
                 null
             }
         }

@@ -4,6 +4,7 @@ import ListaTareasViewModel
 import TareasRespositorio
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.appagenda.MainActivity
 import com.example.appagenda.Modelo.Tarea.Tarea
 import com.example.appagenda.databinding.ActivityDetallesTareaBinding
@@ -45,15 +46,22 @@ class DetallesTareaActivity : AppCompatActivity() {
                     GlobalScope.launch(Dispatchers.Main) {
                         try {
                             if (nuevaTarea != null) {
-                                crearUI(nuevaTarea)
-                                TareasRespositorio.actualizarTarea(
-                                    nuevaTarea.id,
-                                    nuevaTarea.titulo,
-                                    nuevaTarea.descripcion,
-                                    it1
-                                )
-                                listaTareasViewModel.editTarea(nuevaTarea)
-                                ListaTareasFragment.tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
+                                val tareaActual = listaTareasViewModel.obtenerListaTareas().find { t -> t.id == nuevaTarea.id }
+
+                                if(tareaActual != nuevaTarea){
+                                    crearUI(nuevaTarea)
+                                    TareasRespositorio.actualizarTarea(
+                                        nuevaTarea.id,
+                                        nuevaTarea.titulo,
+                                        nuevaTarea.descripcion,
+                                        it1
+                                    )
+                                    listaTareasViewModel.editTarea(nuevaTarea)
+                                    ListaTareasFragment.tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
+                                    mostrarToast("Cambios realizados")
+                                } else {
+                                    mostrarToast("No se ven cambios")
+                                }
                             }
                         } catch (e: Exception) {
                             // Handle error
@@ -69,6 +77,7 @@ class DetallesTareaActivity : AppCompatActivity() {
                     TareasRespositorio.eliminarTarea(tareaId)
                     listaTareasViewModel.eliminarTarea(tareaId)
                     ListaTareasFragment.tareaAdapter.actualizarListaTareas(listaTareasViewModel.obtenerListaTareas())
+                    mostrarToast("Tarea eliminada")
                     finish()
                 } catch (e: Exception) {
                     // Handle error
@@ -90,5 +99,9 @@ class DetallesTareaActivity : AppCompatActivity() {
         val descripcion = binding.etDescripcion.text.toString()
 
         return fecha?.let { Tarea(id, titulo, it, fechaString, descripcion) }
+    }
+
+    private fun mostrarToast(mensaje: String) {
+        Toast.makeText(this@DetallesTareaActivity, mensaje, Toast.LENGTH_SHORT).show()
     }
 }

@@ -99,6 +99,7 @@ class ListaTareasFragment : Fragment() {
 
             if (titulo.isNotEmpty() && descripcion.isNotEmpty() && fecha != null) {
                 agregarTareaConCoroutines(titulo, descripcion, fecha, listaTareasViewModel)
+                Toast.makeText(requireContext(), "Tarea añadida", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             } else {
                 // Mostrar un mensaje de error si falta algún dato
