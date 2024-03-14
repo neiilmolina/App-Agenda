@@ -24,7 +24,7 @@ import com.google.firebase.firestore.firestore
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
-    private lateinit var auth: FirebaseAuth
+    lateinit var auth: FirebaseAuth
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding: FragmentRegisterBinding get() = _binding!!

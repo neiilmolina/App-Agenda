@@ -2,6 +2,7 @@ package com.example.appagenda.ui.listaTareas
 
 import ListaTareasViewModel
 import TareasRespositorio
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.example.appagenda.databinding.FragmentListaTareasBinding
 import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity
 import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.POSICION_TAREA
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import java.util.Date
 
 class ListaTareasFragment : Fragment() {
@@ -36,6 +38,10 @@ class ListaTareasFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    override fun onStart() {
+        super.onStart()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -90,6 +96,30 @@ class ListaTareasFragment : Fragment() {
         val etTitulo: EditText = dialog.findViewById(R.id.etTitulo)
         val etFecha: EditText = dialog.findViewById(R.id.etFecha)
         val etDescripcion: EditText = dialog.findViewById(R.id.etDescripcion)
+        val btnFecha: Button = dialog.findViewById(R.id.btnFecha)
+
+        // Listener para abrir el DatePickerDialog al hacer clic en el botón de fecha
+        btnFecha.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                    // Actualizar el campo de texto con la fecha seleccionada
+                    val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
+                    etFecha.setText(selectedDate)
+                },
+                year,
+                month,
+                day
+            )
+
+            // Mostrar el DatePickerDialog
+            datePickerDialog.show()
+        }
 
         btnDialogTarea.setOnClickListener {
             val titulo = etTitulo.text.toString()
@@ -99,6 +129,7 @@ class ListaTareasFragment : Fragment() {
 
             if (titulo.isNotEmpty() && descripcion.isNotEmpty() && fecha != null) {
                 agregarTareaConCoroutines(titulo, descripcion, fecha, listaTareasViewModel)
+                Toast.makeText(requireContext(), "Tarea añadida", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             } else {
                 // Mostrar un mensaje de error si falta algún dato
@@ -108,6 +139,8 @@ class ListaTareasFragment : Fragment() {
 
         dialog.show()
     }
+
+
 
     private fun agregarTareaConCoroutines(
         titulo: String,
@@ -126,6 +159,7 @@ class ListaTareasFragment : Fragment() {
                 }
 
             } catch (e: Exception) {
+
                 // Manejar errores, por ejemplo, loggear el error
                 e.printStackTrace()
             }

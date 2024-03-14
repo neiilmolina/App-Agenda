@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="@string/dialog_title"
         android:textColor="@color/black"
-        android:textSize="30sp"
-        android:text="@string/dialog_title" />
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/etTitulo"
@@ -23,10 +23,32 @@
         android:hint="@string/title_element"
         tools:text="Titulo" />
 
-    <EditText
-        android:id="@+id/etFecha"
-        style="@style/dialog_tarea_item"
-        android:hint="@string/date_element_dialog" />
+    <LinearLayout
+        android:id="@+id/layoutFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="top">
+
+        <EditText
+            android:id="@+id/etFecha"
+            style="@style/dialog_tarea_item"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/date_element_dialog"
+            android:layout_gravity=""/>
+
+        <Button
+            android:id="@+id/btnFecha"
+            style="@style/btn_styles"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_calendar" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etDescripcion"
