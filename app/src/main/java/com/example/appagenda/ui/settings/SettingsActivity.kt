@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appagenda.R
-import com.example.appagenda.databinding.FragmentLoginBinding
+import com.example.appagenda.databinding.ActivityLoginBinding
 import com.example.appagenda.databinding.FragmentSettingsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,16 +16,16 @@ import com.google.firebase.Firebase
 class SettingsActivity : AppCompatActivity() {
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
-    private var _binding: FragmentLoginBinding? = null
-    private val binding: FragmentLoginBinding
+    private var _binding: ActivityLoginBinding? = null
+    private val binding: ActivityLoginBinding
         get() = _binding!!
 
     // [END declare_auth]
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.fragment_login)
-        _binding = FragmentLoginBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_login)
+        _binding = ActivityLoginBinding.inflate(layoutInflater)
         // [START initialize_auth]
         // Initialize Firebase Auth
         auth = Firebase.auth
