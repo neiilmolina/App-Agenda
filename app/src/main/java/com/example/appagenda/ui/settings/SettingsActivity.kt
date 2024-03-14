@@ -1,14 +1,10 @@
 package com.example.appagenda.ui.settings
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appagenda.R
 import com.example.appagenda.databinding.ActivityLoginBinding
-import com.example.appagenda.databinding.FragmentSettingsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
@@ -105,8 +101,6 @@ class SettingsActivity : AppCompatActivity() {
     private fun updateUI(user: FirebaseUser?) {
     }
 
-    private fun reload() {
-    }
     companion object {
         const val TAG = "EmailPassword"
     }
