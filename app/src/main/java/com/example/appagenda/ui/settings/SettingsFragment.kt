@@ -28,6 +28,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
@@ -49,9 +50,26 @@ class SettingsFragment : Fragment() {
         if (currentUser != null) {
            binding.btnLogin.isVisible = false
             binding.btnLogout.isVisible = true
+            binding.tvRegister.isVisible = false
+            binding.loginQuestion.isVisible = false
+            binding.newEdad.isVisible = true
+            binding.newName.isVisible = true
+            binding.pedirEdad2.isVisible = true
+            binding.pedirNombre2.isVisible = true
+            binding.btnActualizar.isVisible = true
+            binding.btnViewRegister.isVisible = false
+
         } else {
             binding.btnLogin.isVisible = true
             binding.btnLogout.isVisible = false
+            binding.tvRegister.isVisible = true
+            binding.loginQuestion.isVisible = true
+            binding.newEdad.isVisible = false
+            binding.newName.isVisible = false
+            binding.pedirEdad2.isVisible = false
+            binding.pedirNombre2.isVisible = false
+            binding.btnActualizar.isVisible = false
+            binding.btnViewRegister.isVisible = true
         }
     }
 
@@ -89,6 +107,33 @@ class SettingsFragment : Fragment() {
                     AppCompatDelegate.setDefaultNightMode(newNightMode)
                     // Recrear la actividad para que el cambio de tema surta efecto
                     requireActivity().recreate()
+                }
+            }
+
+            btnActualizar.setOnClickListener {
+                val db = Firebase.firestore
+                val user = auth.currentUser
+                val nombre = binding.newName.text.toString()
+                val edad = binding.newEdad.text.toString().toInt()
+                val map = hashMapOf<String, Any>(
+                    "name" to nombre,
+                    "age" to edad,
+                )
+
+                if (user != null) {
+                    db.collection("users").document(user.uid)
+                        .update(map as Map<String, Any>)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(TAG, "C AÑADIDOOOOO")
+                            Toast.makeText(
+                                context,
+                                "Datos actualizados correctamente",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "Error adding document", e)
+                        }
                 }
             }
 /*
