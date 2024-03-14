@@ -46,6 +46,7 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.vistaRegister)
             }
         }
+
         // Initialize Firebase Auth
         auth = Firebase.auth
     }
@@ -59,9 +60,11 @@ class LoginFragment : Fragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
+
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
                     findNavController().navigate(R.id.navigation_home)
+
                     val user = auth.currentUser
                 } else {
                     // If sign in fails, display a message to the user.

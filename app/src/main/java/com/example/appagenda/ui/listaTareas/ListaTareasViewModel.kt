@@ -46,4 +46,8 @@ class ListaTareasViewModel : ViewModel() {
         _listaTareas = _listaTareas.filter { t -> t.id != idTarea }.toMutableList()
     }
 
+    fun vaciarLista(){
+        _listaTareas = emptyList()
+    }
+
 }

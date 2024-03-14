@@ -38,6 +38,10 @@ class ListaTareasFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    override fun onStart() {
+        super.onStart()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
@@ -155,6 +159,7 @@ class ListaTareasFragment : Fragment() {
                 }
 
             } catch (e: Exception) {
+
                 // Manejar errores, por ejemplo, loggear el error
                 e.printStackTrace()
             }

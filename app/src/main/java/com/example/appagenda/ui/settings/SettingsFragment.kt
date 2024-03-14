@@ -136,20 +136,7 @@ class SettingsFragment : Fragment() {
                         }
                 }
             }
-/*
-            btnLogin.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, loginFragment )
-                    .addToBackStack(null) // Esto agrega el fragmento actual a la pila de retroceso
-                    .commit()
-            }
-            btnViewRegister.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, registerFragment)
-                    .addToBackStack(null) // Esto agrega el fragmento actual a la pila de retroceso
-                    .commit()
-            }
-*/
+
         }
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -157,6 +144,7 @@ class SettingsFragment : Fragment() {
 
     private fun signOut() {
         auth.signOut()
+        MainActivity.listaTareasViewModel.vaciarLista()
         onStart()
     }
 

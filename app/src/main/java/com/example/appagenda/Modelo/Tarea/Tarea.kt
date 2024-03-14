@@ -10,7 +10,8 @@ data class Tarea(
     var titulo: String,
     var fecha: Date,
     var fechaString: String?,
-    var descripcion: String
+    var descripcion: String,
+    var idUsuario: String
 ) {
     companion object {
         private val formatoFecha = SimpleDateFormat("dd/MM/yyyy")
