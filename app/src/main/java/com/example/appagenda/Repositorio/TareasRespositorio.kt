@@ -86,8 +86,7 @@ object TareasRespositorio {
 
         try {
             if (user != null) {
-                db.collection(COLLECTION_PATH).document(idTarea).update(tarea as Map<String, Any>)
-                    .await()
+                db.collection(COLLECTION_PATH).document(idTarea).set(tarea).await()
                 Log.d(TAG, "Tarea actualizada correctamente")
             }
         } catch (e: Exception) {
