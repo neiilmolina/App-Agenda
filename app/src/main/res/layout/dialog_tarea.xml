@@ -5,6 +5,8 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:background="@drawable/border_dialog_tareas"
+    android:backgroundTint="#B5A1A1A1"
+    android:backgroundTintMode="src_in"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -14,7 +16,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/dialog_title"
-        android:textColor="@color/black"
+
         android:textSize="30sp" />
 
     <EditText
@@ -27,23 +29,23 @@
         android:id="@+id/layoutFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="top">
+        android:gravity="top"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/etFecha"
             style="@style/dialog_tarea_item"
+            android:layout_gravity=""
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:enabled="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:hint="@string/date_element_dialog"
-            android:layout_gravity=""/>
+            android:hint="@string/date_element_dialog" />
 
         <Button
             android:id="@+id/btnFecha"
-            style="@style/btn_styles"
+            style="@style/ThemeOverlay.MyDarkButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
@@ -57,9 +59,10 @@
 
     <Button
         android:id="@+id/btnDialogTarea"
-        style="@style/btn_styles"
+        style="@style/ThemeOverlay.MyDarkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+
         android:text="@string/add_element" />
 </LinearLayout>

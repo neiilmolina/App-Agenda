@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,9 @@ import com.example.appagenda.R
 import com.example.appagenda.databinding.FragmentListaTareasBinding
 import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity
 import com.example.appagenda.ui.DetallesTarea.DetallesTareaActivity.Companion.POSICION_TAREA
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Date
@@ -31,6 +35,7 @@ class ListaTareasFragment : Fragment() {
     private var listaTareasViewModel: ListaTareasViewModel ?=null
 
     private var _binding: FragmentListaTareasBinding? = null
+    lateinit var auth: FirebaseAuth
 
     companion object{
         lateinit var tareaAdapter: TareaAdapter
@@ -39,19 +44,21 @@ class ListaTareasFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onStart() {
+        auth = Firebase.auth
         super.onStart()
-
+        if (auth.currentUser!=null){
+            listaTareasViewModel?.obtenerTareas()
+            Log.i("dennis2", listaTareasViewModel?.obtenerListaTareas()?.size.toString())
+            Log.i("dennis2 id", auth.currentUser!!.uid)
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
         listaTareasViewModel = MainActivity.listaTareasViewModel
-
         _binding = FragmentListaTareasBinding.inflate(inflater, container, false)
-
         // colocar los elementos de la lista
         binding.rvListaTareas.layoutManager = LinearLayoutManager(requireContext())
-
+        listaTareasViewModel?.obtenerTareas()
         // inicializar el adapter
         tareaAdapter =
             TareaAdapter(listaTareasViewModel!!.obtenerListaTareas()) { position -> navegarDetallesTarea(position) }

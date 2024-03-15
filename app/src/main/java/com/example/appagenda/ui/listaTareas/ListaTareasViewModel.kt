@@ -3,6 +3,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.appagenda.Modelo.Tarea.Tarea
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class ListaTareasViewModel : ViewModel() {
 
@@ -48,6 +49,22 @@ class ListaTareasViewModel : ViewModel() {
 
     fun vaciarLista(){
         _listaTareas = emptyList()
+    }
+
+    fun obtenerTareaMasProxima(tareas: List<Tarea>): Tarea? {
+        val hoy = Calendar.getInstance()
+
+        var tareaMasProxima: Tarea? = null
+        var diferenciaMinima = Long.MAX_VALUE
+
+        for (tarea in tareas) {
+            val diferencia = tarea.fecha.time - hoy.timeInMillis
+            if (diferencia >= 0 && diferencia < diferenciaMinima) {
+                diferenciaMinima = diferencia
+                tareaMasProxima = tarea
+            }
+        }
+        return tareaMasProxima
     }
 
 }

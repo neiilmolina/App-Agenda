@@ -13,22 +13,22 @@
     <fragment
         android:id="@+id/navigation_lista_tareas"
         android:name="com.example.appagenda.ui.listaTareas.ListaTareasFragment"
-        android:label="@string/title_home"
+        android:label="tareas"
         tools:layout="@layout/fragment_lista_tareas" />
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.appagenda.ui.settings.SettingsFragment"
-        android:label="@string/title_home"
+        android:label="Configuracion"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/vistaLog"
         android:name="com.example.appagenda.ui.login.LoginFragment"
-        android:label="@string/title_home"
+        android:label="Iniciar Sesion"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/vistaRegister"
         android:name="com.example.appagenda.ui.register.RegisterFragment"
-        android:label="@string/title_home"
+        android:label="Registro"
         tools:layout="@layout/fragment_register" />
 
 </navigation>

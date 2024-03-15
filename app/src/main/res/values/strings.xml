@@ -41,4 +41,7 @@
     <string name="date_element">Fecha</string>
     <string name="date_element_dialog">Fecha (dd-MM-yyyy)</string>
     <string name="dialog_title">Añade una tarea</string>
+    <string name="welcome_msg">¡Bienvenido a nuestra aplicación de gestión de tareas!
+Organiza tu vida de manera eficiente y efectiva con nosotros. Registra tus tareas, establece recordatorios y maximiza tu productividad. ¡Comienza a lograr tus metas hoy mismo!</string>
+    <string name="register_msg">Tan solo tienes que registrarte para empezar a almacenar y gestionar tus tareas</string>
 </resources>

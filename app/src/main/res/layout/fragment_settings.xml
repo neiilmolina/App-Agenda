@@ -60,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        style="@style/ThemeOverlay.MyDarkButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_question"
         android:layout_marginTop="20dp"
@@ -86,6 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegister"
         android:layout_marginTop="20dp"
+        style="@style/ThemeOverlay.MyDarkButton"
         android:layout_marginBottom="20dp"
         android:text="@string/title_register"
         />
@@ -101,6 +103,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:text="@string/btn_logout"
+        style="@style/ThemeOverlay.MyDarkButton"
         />
 
     <TextView
@@ -151,6 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        style="@style/ThemeOverlay.MyDarkButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/new_edad"
         android:layout_marginTop="20dp"

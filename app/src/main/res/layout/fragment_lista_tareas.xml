@@ -16,7 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Lista de Tareas"
-            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

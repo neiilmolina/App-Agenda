@@ -11,7 +11,6 @@
     <!-- Item Tarea -->
         <!-- Titulo -->
     <style name="titulo_tarea" parent="android:Widget.TextView">
-        <item name="android:textColor">@color/titulo_tarea</item>
         <item name="android:textSize">20sp</item>
         <item name="android:padding">10dp</item>
     </style>
@@ -47,7 +46,7 @@
     <!-- Dark Buttons -->
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/grey_500</item>
-        <item name="backgroundTint">@color/teal_700</item>
+        <item name="backgroundTint">@color/purple_500</item>
         <item name="android:layout_marginRight">4dp</item>
         <item name="android:layout_marginLeft">4dp</item>
         <item name="android:textColor">@android:color/white</item>
